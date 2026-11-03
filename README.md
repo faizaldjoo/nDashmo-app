@@ -5,14 +5,14 @@
 <h1 align="center">nDashMo</h1>
 
 <p align="center"><b>Neue Dashboard with Emotion</b><br>
-A car home screen for an Android tablet as your car head unit.</p>
+A car home screen for Android tablets and car head units.</p>
 
 <p align="center">
   <img src="docs/screenshots/home-matte.jpg" width="49%" alt="nDashMo home screen, Matte theme">
   <img src="docs/screenshots/home-glass.jpg" width="49%" alt="nDashMo home screen, Glass theme">
 </p>
 
-nDashMo puts the map, music, clock, weather and your speed in one dashboard, and replaces the tablet's home screen.
+nDashMo puts the map, music, clock, weather and your speed in one dashboard, and replaces your device's home screen.
 It has two looks: **Matte** (flat and dark, with a light version by day) and **Glass** (see-through panels over a photo
 wallpaper). Built and tested on a Samsung Galaxy Tab A7 Lite (Android 14, One UI 6.1). Made by
 [@faizald.jo](https://www.threads.com/@faizald.jo).
@@ -29,8 +29,8 @@ wallpaper). Built and tested on a Samsung Galaxy Tab A7 Lite (Android 14, One UI
   Long titles scroll.
 - **Volume and brightness** bars, and a thin strip on the screen edge to change them over other apps.
 - **Sidebar**: battery and connection, split screen with two apps, your pinned and recent apps, All apps.
-- **Car power**: unplug the charger (car off) and the music pauses and the screen sleeps; plug in (car on) and it
-  wakes to the home screen and the music carries on.
+- **Car power** (for a device that charges from the car): when the car is switched off, the music pauses and the
+  screen sleeps; when it starts, the screen wakes to the home screen and the music carries on.
 - **Screensaver**: a friendly face (bbot) with the clock and the song, after 5 minutes without a touch while
   charging. Play with it: hold, rub, double tap.
 - **Gestures**: swipe left for All apps, right for the screensaver; two fingers up or down for volume, right for
@@ -47,16 +47,18 @@ wallpaper). Built and tested on a Samsung Galaxy Tab A7 Lite (Android 14, One UI
 
 ## Install the APK
 
-You need an Android tablet (or car head unit) with **Android 8 or newer**. No computer needed.
+You need an Android tablet or car head unit with **Android 8 or newer** (see
+[Will it work on my device?](#will-it-work-on-my-device)). No computer needed.
 
-1. On the tablet, download `nDashMo-1.0.apk` from this repo's
-   [Releases](https://github.com/faizaldjoo/nDashmo-app/releases).
-2. Open it. Android asks to allow installing apps from your browser (or Files): allow it, then tap **Install**.
-   If Play Protect warns about an unknown developer, choose **More details > Install anyway**.
-3. **Android 13 and newer:** Settings > Apps > nDashMo > ⋮ (top right) > **Allow restricted settings**. Without this,
-   Accessibility and Notification access stay greyed out for an app installed from an APK.
+1. On the device, open this repo's [Releases](https://github.com/faizaldjoo/nDashmo-app/releases) in a browser and
+   download the APK of the latest release (`nDashMo-<version>.apk`).
+2. Open the downloaded file. Android asks to allow installing apps from your browser (or file manager): allow it,
+   then tap **Install**. If Play Protect warns about an unknown developer, choose **More details > Install anyway**.
+3. **Android 13 and newer:** Settings > Apps > nDashMo, then the ⋮ menu (top right) > **Allow restricted settings**.
+   Without this, Accessibility and Notification access stay greyed out for an app installed from an APK.
 4. Open nDashMo and allow **Location** (speed, map and weather).
-5. Press **Home** and choose **nDashMo**, then **Always** (or Settings > Apps > Default apps > Home app).
+5. Press **Home** and choose **nDashMo**, then **Always**. If nothing asks, set it under Settings > Apps > Default
+   apps > Home app (the names differ a little between devices).
 6. Open **Controls** (tap the battery pill at the top of the sidebar) > **Details**. The About page lists what is
    still off and opens the right setting for each:
    - **Notification access**: the song, the music controls and the turn card.
@@ -84,7 +86,7 @@ Tried it on another device? Tell us how it went in an [issue](https://github.com
 
 ### Updating
 
-Install the new APK over the old one: everything you set stays. On some tablets an update switches nDashMo's
+Install the new APK over the old one: everything you set stays. On some devices an update switches nDashMo's
 **Accessibility** off again; Controls shows a warning until you turn it back on (Settings > Accessibility >
 Installed apps > nDashMo).
 
@@ -97,14 +99,15 @@ Installed apps > nDashMo).
 
 Android devices (tablets, car head units, phones) often come with apps you never use, and some show ads. nDashMo
 does not remove apps itself (Android doesn't let a normal app do that), but you can do it in a few minutes from a
-computer, letting an AI agent such as [Claude Code](https://claude.com/claude-code) do the typing. This is how the
-tablet nDashMo was built on was cleaned up.
+computer, letting an AI agent such as [Claude Code](https://claude.com/claude-code) do the typing. The tablet nDashMo
+was developed on was cleaned up this way.
 
 **What you need:** a computer (Mac, Windows or Linux) with Android's
 [platform-tools](https://developer.android.com/tools/releases/platform-tools) (`adb`), on the same Wi-Fi as the device
 (or a USB cable).
 
-1. **On the device:** Settings > About (on Samsung: About > Software information) > tap **Build number** 7 times.
+1. **On the device:** Settings > About phone / About tablet (on Samsung: About > Software information) > tap
+   **Build number** 7 times.
    Then Settings > Developer options > **Wireless debugging** on > **Pair device with pairing code** (Android 11 and
    newer; on older devices or head units, turn on **USB debugging** and connect a cable instead).
 2. **On the computer:** `adb pair <ip>:<port>` with the code the device shows, then `adb connect <ip>:<port>` (the
@@ -134,16 +137,15 @@ battery cost. To undo it, set Private DNS back to Automatic.
 **To undo the clean-up:** run `restore.sh`, or put any single app back with
 `adb shell cmd package install-existing <package>`. A factory reset also brings every app back.
 
-**At your own risk.** Removing the wrong system app can break a feature (or a whole device on some head units), so
-read the list before you approve it, and keep `removed-packages.txt` and `restore.sh`. Car head units often use
-their own system apps for the radio, camera, steering wheel buttons or CarPlay / Android Auto: tell the agent which
-of those you use. Afterwards, turn Wireless
-debugging off again.
+**At your own risk.** Removing the wrong system app can break a feature (on some head units, the whole device), so
+read the list before you approve it, and keep `removed-packages.txt` and `restore.sh`. Car head units often use their
+own system apps for the radio, reversing camera, steering wheel buttons or CarPlay / Android Auto: tell the agent
+which of those you use. When you are done, turn Wireless debugging (or USB debugging) off again.
 
 ## Report a problem
 
-Open an [issue](https://github.com/faizaldjoo/nDashmo-app/issues): what happened, what you expected, your tablet
-(or head unit) model and Android version, and a screenshot if you can. Controls > Details > **Drive log** shows what
+Open an [issue](https://github.com/faizaldjoo/nDashmo-app/issues): what happened, what you expected, your device's
+make and model and its Android version, and a screenshot if you can. Controls > Details > **Drive log** shows what
 nDashMo did and when (power in and out, the screensaver, split screen); a photo of it helps with anything to do with
 the car.
 
