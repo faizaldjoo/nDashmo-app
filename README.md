@@ -86,13 +86,6 @@ the car.
 New versions appear under [Releases](https://github.com/faizaldjoo/nDashmo-app/releases). Install the new APK over
 the old one: your settings stay.
 
-## License
-
-© 2026 [@faizald.jo](https://www.threads.com/@faizald.jo). All rights reserved. You may download, install and use the
-nDashMo app from this repo's Releases. You may not copy, modify, rebuild, publish or redistribute the code, the design
-or the app, in whole or in part, without written permission. See [LICENSE](LICENSE). The third-party parts listed
-under Credits keep their own licenses.
-
 ## Credits
 
 Map data © OpenStreetMap contributors, OpenMapTiles, OpenFreeMap; MapLibre Native. Weather Open-Meteo, weather icons
