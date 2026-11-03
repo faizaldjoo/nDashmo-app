@@ -93,6 +93,47 @@ Installed apps > nDashMo).
 - The map, weather and speed limits need an internet connection (mobile data is fine).
 - It never switches Bluetooth, Wi-Fi or mobile data by itself: those buttons open Android's own panels.
 
+## Remove bloatware and ads (optional)
+
+Tablets and head units often come with apps you never use, and some show ads. nDashMo does not remove apps itself
+(Android doesn't let a normal app do that), but you can do it in a few minutes from a computer, letting an AI agent
+such as [Claude Code](https://claude.com/claude-code) do the typing. This is how the tablet nDashMo was built on was
+cleaned up.
+
+**What you need:** a computer (Mac, Windows or Linux) with Android's
+[platform-tools](https://developer.android.com/tools/releases/platform-tools) (`adb`), on the same Wi-Fi as the tablet.
+
+1. **On the tablet:** Settings > About > Software information > tap **Build number** 7 times. Then Settings >
+   Developer options > **Wireless debugging** on > **Pair device with pairing code**.
+2. **On the computer:** `adb pair <ip>:<port>` with the code the tablet shows, then `adb connect <ip>:<port>` (the
+   address on the Wireless debugging screen). `adb devices` should list the tablet.
+3. **Start the AI agent** in a terminal and paste this:
+
+   ```text
+   My Android tablet is connected over adb (check with `adb devices`). I use it as a car head unit with
+   nDashMo (me.faizal.carhome) as the home app. Help me remove bloatware and ads safely:
+   1. List the installed packages (adb shell pm list packages) and sort them into: ads and tracking,
+      the maker's extras I probably don't need, and system apps I must keep.
+   2. Show me the list and wait for my OK before removing anything. Never remove anything needed to start
+      the tablet, the system UI, Settings, the keyboard, Wi-Fi, Bluetooth, mobile data / SIM, Google Play
+      services, the Play Store, or nDashMo.
+   3. Remove only what I approve, one by one, with `adb shell pm uninstall --user 0 <package>` (it can be
+      undone), and save the list to removed-packages.txt.
+   4. Write restore.sh, which puts every one of them back with `adb shell cmd package install-existing <package>`.
+   ```
+
+**Ads everywhere:** on the tablet, set **Private DNS** to an ad-blocking DNS. Samsung: Settings > Connections > More
+connection settings > Private DNS; other devices: Settings > Network & internet > Private DNS. Choose "Private DNS
+provider hostname" and enter `dns.adguard-dns.com`. It blocks most ads in apps and browsers, with no extra app and no
+battery cost. To undo it, set Private DNS back to Automatic.
+
+**To undo the clean-up:** run `restore.sh`, or put any single app back with
+`adb shell cmd package install-existing <package>`. A factory reset also brings every app back.
+
+**At your own risk.** Removing the wrong system app can break a feature (or a whole device on some head units), so
+read the list before you approve it, and keep `removed-packages.txt` and `restore.sh`. Afterwards, turn Wireless
+debugging off again.
+
 ## Report a problem
 
 Open an [issue](https://github.com/faizaldjoo/nDashmo-app/issues): what happened, what you expected, your tablet
