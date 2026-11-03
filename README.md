@@ -63,6 +63,22 @@ You need an Android tablet (or car head unit) with **Android 8 or newer**. No co
    - **Accessibility**: sleep when unplugged, wake when plugged in, split screen, recent apps and the edge strip.
    - The brightness bar asks once for **Modify system settings**.
 
+### Will it work on my device?
+
+nDashMo is built and tested on a Samsung Galaxy Tab A7 Lite (Android 14). It should also run on other Android
+tablets and on Android car head units, with these limits:
+
+- **Needs** Android 8 or newer on an ARM processor (nearly all tablets and head units; not the rare x86 head units).
+- **Screen:** landscape, about 1024 x 600 or larger (common head units are 1024 x 600 or 1280 x 720; 8 to 10 inch
+  tablets are fine). It always runs in landscape; very small screens (800 x 480) will feel cramped.
+- **Samsung only:** split screen and the Bluetooth pop-up. On other brands those buttons do nothing.
+- **Head units without a battery** are always "charging": the screen does not sleep when the car is switched off (the
+  car powers the unit down itself), and the battery shows 100%.
+- **Without Google services** (some head units), the place name may not show; the map, weather and speed still work.
+- **Some head units do not let you change the Home app.** nDashMo then runs as a normal app you open from the app list.
+
+Tried it on another device? Tell us how it went in an [issue](https://github.com/faizaldjoo/nDashmo-app/issues).
+
 ### Updating
 
 Install the new APK over the old one: everything you set stays. On some tablets an update switches nDashMo's
