@@ -88,8 +88,6 @@ Installed apps > nDashMo).
 ### Good to know
 
 - The map, weather and speed limits need an internet connection (mobile data is fine).
-- Split screen and the Bluetooth pop-up work on Samsung tablets (One UI); the rest works on any Android tablet.
-- nDashMo is designed for a landscape screen around 8 to 10 inches.
 - It never switches Bluetooth, Wi-Fi or mobile data by itself: those buttons open Android's own panels.
 
 ## Report a problem
