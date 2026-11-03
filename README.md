@@ -71,7 +71,10 @@ tablets and on Android car head units, with these limits:
 - **Needs** Android 8 or newer on an ARM processor (nearly all tablets and head units; not the rare x86 head units).
 - **Screen:** landscape, about 1024 x 600 or larger (common head units are 1024 x 600 or 1280 x 720; 8 to 10 inch
   tablets are fine). It always runs in landscape; very small screens (800 x 480) will feel cramped.
-- **Samsung only:** split screen and the Bluetooth pop-up. On other brands those buttons do nothing.
+- **Split screen:** on Samsung (One UI) nDashMo opens it through One UI's own menu. On other devices it uses
+  Android's own split screen, which most Android 7 to 11 tablets and head units allow; some devices and newer Android
+  versions don't let apps start it, and nDashMo says so.
+- **Bluetooth button:** Samsung's Bluetooth pop-up on Samsung, Android's Bluetooth settings on other devices.
 - **Head units without a battery** are always "charging": the screen does not sleep when the car is switched off (the
   car powers the unit down itself), and the battery shows 100%.
 - **Without Google services** (some head units), the place name may not show; the map, weather and speed still work.
