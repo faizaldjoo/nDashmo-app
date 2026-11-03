@@ -95,34 +95,38 @@ Installed apps > nDashMo).
 
 ## Remove bloatware and ads (optional)
 
-Tablets and head units often come with apps you never use, and some show ads. nDashMo does not remove apps itself
-(Android doesn't let a normal app do that), but you can do it in a few minutes from a computer, letting an AI agent
-such as [Claude Code](https://claude.com/claude-code) do the typing. This is how the tablet nDashMo was built on was
-cleaned up.
+Android devices (tablets, car head units, phones) often come with apps you never use, and some show ads. nDashMo
+does not remove apps itself (Android doesn't let a normal app do that), but you can do it in a few minutes from a
+computer, letting an AI agent such as [Claude Code](https://claude.com/claude-code) do the typing. This is how the
+tablet nDashMo was built on was cleaned up.
 
 **What you need:** a computer (Mac, Windows or Linux) with Android's
-[platform-tools](https://developer.android.com/tools/releases/platform-tools) (`adb`), on the same Wi-Fi as the tablet.
+[platform-tools](https://developer.android.com/tools/releases/platform-tools) (`adb`), on the same Wi-Fi as the device
+(or a USB cable).
 
-1. **On the tablet:** Settings > About > Software information > tap **Build number** 7 times. Then Settings >
-   Developer options > **Wireless debugging** on > **Pair device with pairing code**.
-2. **On the computer:** `adb pair <ip>:<port>` with the code the tablet shows, then `adb connect <ip>:<port>` (the
-   address on the Wireless debugging screen). `adb devices` should list the tablet.
+1. **On the device:** Settings > About (on Samsung: About > Software information) > tap **Build number** 7 times.
+   Then Settings > Developer options > **Wireless debugging** on > **Pair device with pairing code** (Android 11 and
+   newer; on older devices or head units, turn on **USB debugging** and connect a cable instead).
+2. **On the computer:** `adb pair <ip>:<port>` with the code the device shows, then `adb connect <ip>:<port>` (the
+   address on the Wireless debugging screen). With a cable, skip this. `adb devices` should list the device.
 3. **Start the AI agent** in a terminal and paste this:
 
    ```text
-   My Android tablet is connected over adb (check with `adb devices`). I use it as a car head unit with
-   nDashMo (me.faizal.carhome) as the home app. Help me remove bloatware and ads safely:
+   My Android device is connected over adb (check with `adb devices`). First find out what it is
+   (adb shell getprop ro.product.manufacturer, ro.product.model and ro.build.version.release) and tell me.
+   Help me remove bloatware and ads safely:
    1. List the installed packages (adb shell pm list packages) and sort them into: ads and tracking,
-      the maker's extras I probably don't need, and system apps I must keep.
+      the maker's extras I probably don't need, and system apps I must keep. Use what you know about
+      this maker and model.
    2. Show me the list and wait for my OK before removing anything. Never remove anything needed to start
-      the tablet, the system UI, Settings, the keyboard, Wi-Fi, Bluetooth, mobile data / SIM, Google Play
-      services, the Play Store, or nDashMo.
+      the device, the system UI, the launcher or home app I use, Settings, the keyboard, Wi-Fi, Bluetooth,
+      phone / SIM / mobile data, Google Play services, the Play Store, or apps I tell you I use.
    3. Remove only what I approve, one by one, with `adb shell pm uninstall --user 0 <package>` (it can be
       undone), and save the list to removed-packages.txt.
    4. Write restore.sh, which puts every one of them back with `adb shell cmd package install-existing <package>`.
    ```
 
-**Ads everywhere:** on the tablet, set **Private DNS** to an ad-blocking DNS. Samsung: Settings > Connections > More
+**Ads everywhere:** on the device, set **Private DNS** to an ad-blocking DNS. Samsung: Settings > Connections > More
 connection settings > Private DNS; other devices: Settings > Network & internet > Private DNS. Choose "Private DNS
 provider hostname" and enter `dns.adguard-dns.com`. It blocks most ads in apps and browsers, with no extra app and no
 battery cost. To undo it, set Private DNS back to Automatic.
@@ -131,7 +135,9 @@ battery cost. To undo it, set Private DNS back to Automatic.
 `adb shell cmd package install-existing <package>`. A factory reset also brings every app back.
 
 **At your own risk.** Removing the wrong system app can break a feature (or a whole device on some head units), so
-read the list before you approve it, and keep `removed-packages.txt` and `restore.sh`. Afterwards, turn Wireless
+read the list before you approve it, and keep `removed-packages.txt` and `restore.sh`. Car head units often use
+their own system apps for the radio, camera, steering wheel buttons or CarPlay / Android Auto: tell the agent which
+of those you use. Afterwards, turn Wireless
 debugging off again.
 
 ## Report a problem
